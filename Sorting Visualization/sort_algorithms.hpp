@@ -13,6 +13,7 @@ const int _REPLACE = 1;
 const int _BUBBLE_SORT = 1;
 const int _INSERTION_SORT = 2;
 const int _MERGE_SORT = 3;
+const int _QUICK_SORT = 4;
 
 struct Event {
 	int a;
@@ -31,7 +32,10 @@ inline int total_swaps = 0;
 void run_bubble_sort(std::vector<int> num);
 void run_bubble_sort(std::vector<int> num);
 void run_insertion_sort(std::vector<int> num);
-void merge(int array[], int const left, int const mid, int const right);
 void run_merge_sort(int array[], int const begin, int const end);
+void run_quick_sort(int array[], int const begin, int const end);
+
+void merge(int array[], int const left, int const mid, int const right);
+int partition(int array[], int low, int high);
 
 #endif

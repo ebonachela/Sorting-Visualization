@@ -104,3 +104,35 @@ void run_merge_sort(int array[], int const begin, int const end) {
 	run_merge_sort(array, mid + 1, end);
 	merge(array, begin, mid, end);
 }
+
+int partition(int array[], int low, int high) {
+
+	int pivot = array[high];
+
+	int i = (low - 1);
+
+	for (int j = low; j < high; j++) {
+		if (array[j] <= pivot) {
+			i++;
+
+			std::swap(array[i], array[j]);
+			events_queue.push(Event{ i, j, _SWAP });
+			total_swaps++;
+		}
+	}
+
+	std::swap(array[i + 1], array[high]);
+	events_queue.push(Event{ i + 1, high, _SWAP });
+	total_swaps++;
+
+	return i + 1;
+}
+
+void run_quick_sort(int array[], int const begin, int const end) {
+	if (begin >= end) return;
+
+	int pi = partition(array, begin, end);
+
+	run_quick_sort(array, begin, pi - 1);
+	run_quick_sort(array, pi + 1, end);
+}

@@ -9,7 +9,7 @@ int swap_counts_num = 0;
 const sf::Time wait_between_swaps = sf::milliseconds(10);
 const int max_rec_size = 650;
 const int rec_y_pos = 720;
-const int sort_algorithm = _MERGE_SORT;
+const int sort_algorithm = _QUICK_SORT;
 
 void handle_events() {
 	if (events_queue.size() > 0) {
@@ -94,9 +94,6 @@ int main()
 
 	sf::Event event;
 
-	int *arr = new int[n];
-	std::copy(number_array.begin(), number_array.end(), arr);
-
 	if (sort_algorithm == _BUBBLE_SORT) {
 		sf::Thread thread(&run_bubble_sort, number_array);
 		thread.launch();
@@ -106,7 +103,17 @@ int main()
 		thread.launch();
 	}
 	else if (sort_algorithm == _MERGE_SORT) {
+		int* arr = new int[n];
+		std::copy(number_array.begin(), number_array.end(), arr);
+
 		sf::Thread thread(std::bind(&run_merge_sort, arr, 0, n - 1));
+		thread.launch();
+	}
+	else if (sort_algorithm == _QUICK_SORT) {
+		int* arr = new int[n];
+		std::copy(number_array.begin(), number_array.end(), arr);
+
+		sf::Thread thread(std::bind(&run_quick_sort, arr, 0, n - 1));
 		thread.launch();
 	}
 
